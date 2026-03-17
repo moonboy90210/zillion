@@ -7,15 +7,15 @@
 // =====================
 const products = [
   // HEADWEAR
-  { id: 1, name: 'Signature Wool Cap', category: 'Headwear', price: 89, badge: 'new', icon: 'fa-hat-cowboy', desc: 'Premium merino wool, structured brim', sizes: ['S/M', 'M/L', 'XL'], colors: ['Black', 'Crimson', 'Grey'] },
-  { id: 2, name: 'Zilli Logo Snapback', category: 'Headwear', price: 65, badge: 'hot', icon: 'fa-hat-cowboy', desc: 'Embroidered logo, adjustable strap', sizes: ['One Size'], colors: ['Black', 'White'] },
-  { id: 3, name: 'Satin Bucket Hat', category: 'Headwear', price: 75, badge: 'new', icon: 'fa-hat-cowboy', desc: 'Reversible satin finish, unisex fit', sizes: ['S', 'M', 'L'], colors: ['Black', 'Silver', 'Red'] },
-  { id: 4, name: 'Beanie Luxe', category: 'Headwear', price: 55, badge: '', icon: 'fa-hat-cowboy', desc: 'Cashmere blend, ribbed knit', sizes: ['One Size'], colors: ['Black', 'Charcoal', 'Cream'] },
+  { id: 1, name: 'Signature Wool Cap', category: 'Headwear', price: 89, badge: 'new', src: 'img/collection/woolcap.png' , icon: 'fa-hat-cowboy', desc: 'Premium merino wool, structured brim', sizes: ['S/M', 'M/L', 'XL'], colors: ['Black', 'Crimson', 'Grey'] },
+  { id: 2, name: 'Zilli Logo Snapback', category: 'Headwear', price: 65, badge: 'hot', src: 'img/collection/snapback.png' , icon: 'fa-hat-cowboy', desc: 'Embroidered logo, adjustable strap', sizes: ['One Size'], colors: ['Black', 'White'] },
+  { id: 3, name: 'Trucker Hat', category: 'Headwear', price: 75, badge: 'new', src: 'img/collection/trucker.png' , icon: 'fa-hat-cowboy', desc: 'Reversible satin finish, unisex fit', sizes: ['S', 'M', 'L'], colors: ['Black', 'Silver', 'Red'] },
+  { id: 4, name: 'Beanie Luxe', category: 'Headwear', price: 55, badge: '', src: 'img/collection/beanie.png' , icon: 'fa-hat-cowboy', desc: 'Cashmere blend, ribbed knit', sizes: ['One Size'], colors: ['Black', 'Charcoal', 'Cream'] },
   // SHIRTS
   { id: 5, name: 'Midnight Oversized Tee', category: 'Shirts', price: 110, originalPrice: 140, badge: 'sale', icon: 'fa-shirt', desc: 'Heavyweight 320gsm cotton', sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'], colors: ['Black', 'White', 'Crimson'] },
   { id: 6, name: 'Zilli Longline Shirt', category: 'Shirts', price: 145, badge: 'new', icon: 'fa-shirt', desc: 'Extended hem, slim fit, premium twill', sizes: ['S', 'M', 'L', 'XL', 'XXL'], colors: ['Black', 'White'] },
   { id: 7, name: 'Graphic Heritage Tee', category: 'Shirts', price: 95, badge: '', icon: 'fa-shirt', desc: 'Vintage wash, screen-printed graphic', sizes: ['XS', 'S', 'M', 'L', 'XL'], colors: ['Black', 'Grey'] },
-  { id: 8, name: 'Cut-Off Linen Shirt', category: 'Shirts', price: 160, badge: 'new', icon: 'fa-shirt', desc: 'Portuguese linen, relaxed fit', sizes: ['S', 'M', 'L', 'XL'], colors: ['Ivory', 'Black', 'Sage'] },
+  { id: 8, name: 'Cut-Off Linen Shirt', category: 'Shirts', price: 160, badge: 'new', src: 'img/collection/tt.png' , icon: 'fa-shirt', desc: 'Portuguese linen, relaxed fit', sizes: ['S', 'M', 'L', 'XL'], colors: ['Ivory', 'Black', 'Sage'] },
   // TRACKSUITS
   { id: 9, name: 'Noir Velour Tracksuit', category: 'Tracksuits', price: 320, badge: 'new', icon: 'fa-person-running', desc: 'Full velour set — jacket + trousers', sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'], colors: ['Black', 'Navy', 'Burgundy'] },
   { id: 10, name: 'Tech-Fleece Set', category: 'Tracksuits', price: 280, originalPrice: 350, badge: 'sale', icon: 'fa-person-running', desc: 'Moisture-wicking fleece, tapered fit', sizes: ['S', 'M', 'L', 'XL', 'XXL'], colors: ['Black', 'Charcoal'] },
@@ -103,10 +103,10 @@ function buildProductCard(p, index = 0) {
   return `
     <div class="product-card reveal" style="transition-delay: ${delay}s;" onclick="void(0)">
       <div class="product-card-img">
-        <div class="placeholder">
+        <img class="placeholder" src="${p.src}" alt="${p.name}">
           <i class="fa-solid ${p.icon}"></i>
-          ${p.name}
-        </div>
+          ${p.name} 
+        </img>
         ${badgeHtml}
         <button class="product-card-wishlist" onclick="event.stopPropagation(); toggleWishlist(this, ${p.id})" title="Wishlist">
           <i class="fa-regular fa-heart"></i>
@@ -470,7 +470,7 @@ function quickView(productId) {
         <i class="fa-solid fa-xmark"></i>
       </button>
       <div style="background: linear-gradient(135deg, var(--black-mid), var(--black-card)); display: flex; align-items: center; justify-content: center; padding: 3rem; min-height: 300px;">
-        <i class="fa-solid ${p.icon}" style="font-size: 5rem; color: var(--crimson); opacity: 0.4;"></i>
+       <img src="${p.src}" alt="${p.name}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
       </div>
       <div style="padding: 2rem; overflow-y: auto;">
         <div style="font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--crimson); margin-bottom: 0.6rem;">${p.category}</div>
@@ -545,9 +545,22 @@ function showToast(message, icon = 'fa-circle-check', isError = false) {
 // =====================
 function handleQuickContact(e) {
   e.preventDefault();
-  showToast('Message sent! We\'ll be in touch shortly.', 'fa-paper-plane');
-}
+    const fname = document.getElementById('qc-fname')?.value;
+  const email = document.getElementById('qc-email')?.value;
+  const subject = document.getElementById('qc-subject')?.value;
+  const message = document.getElementById('qc-message')?.value;
 
+  if (!fname || !email || !subject || !message) {
+    showToast('Please fill in all required fields.', 'fa-circle-xmark', true);
+    return;
+}
+  showToast('Message sent! We\'ll be in touch shortly.', 'fa-paper-plane');
+
+  document.getElementById('qc-fname').value = '';
+  document.getElementById('qc-email').value = '';
+  document.getElementById('qc-subject').value = '';
+  document.getElementById('qc-message').value = '';
+}
 function handleContactSubmit(e) {
   e.preventDefault();
   const fname = document.getElementById('cf-fname')?.value;
